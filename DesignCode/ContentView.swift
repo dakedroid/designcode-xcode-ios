@@ -8,36 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var show = false
+    @State private var offset: CGFloat = 200.0
+    
     var body: some View {
         ZStack {
             
             TitleView()
-              
+                .blur(radius: show ? 20 : 0)
             
+                .animation(.default, value: offset)
+            
+    
             
             CardBottomView()
-              
+                .blur(radius: show ? 20 : 0)
+                .animation(.default, value: offset)
             
-          
+            
+      
             CardView()
                 .offset(x: 0, y: -40)
                 .scaleEffect(0.85)
-                .rotationEffect(Angle(degrees: 15))
-                .rotation3DEffect(Angle(degrees: 50), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
+                .rotationEffect(Angle(degrees: show ? 15: 0))
+                .rotation3DEffect(Angle(degrees: show ? 50 : 0), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
                 .blendMode(.hardLight)
-            
+                .animation(Animation.easeInOut(duration: 0.5), value: offset)
+       
             CardView()
                 .offset(x: 0, y: -20)
                 .scaleEffect(0.9)
-                .rotationEffect(Angle(degrees: 10))
-                .rotation3DEffect(Angle(degrees: 40), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
+                .rotationEffect(Angle(degrees: show ? 10 : 0))
+                .rotation3DEffect(Angle(degrees: show ? 40 : 0), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
                 .blendMode(.hardLight)
-            
+                .animation(Animation.easeOut(duration: 0.5), value: offset)
+       
             
             CertificateView()
+            
                 .scaleEffect(0.95)
-                .rotationEffect(Angle(degrees: 5))
-                .rotation3DEffect(Angle(degrees: 30), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
+                .rotationEffect(Angle(degrees: show ? 5 : 0))
+                .rotation3DEffect(Angle(degrees: show ? 30 : 0), axis: /*@START_MENU_TOKEN@*/(x: 10.0, y: 10.0, z: 10.0)/*@END_MENU_TOKEN@*/)
+                .animation(Animation.spring(), value: offset)
+                .onTapGesture {
+                    self.show.toggle()
+                    offset -= 100.0
+                    
+                }
+            
             
             
         }
@@ -101,8 +120,11 @@ struct TitleView: View {
             }
             Image("Illustration5")
             Spacer()
-        }.padding()
-    
+        }
+        .padding()
+        
+        
+        
     }
 }
 
