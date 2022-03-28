@@ -17,7 +17,6 @@ struct ContentView: View {
             
             TitleView()
                 .blur(radius: show ? 20 : 0)
-            
                 .animation(.default, value: offset)
             
             
@@ -115,7 +114,7 @@ struct TitleView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Certificates")
+                Text("Certificados")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                 Spacer()
@@ -133,14 +132,17 @@ struct TitleView: View {
 struct CardBottomView: View {
     var body: some View {
         VStack(spacing: 20.0) {
-            
+       
+
             Rectangle()
                 .frame(width: 60, height: 6 )
                 .cornerRadius(3.0)
                 .opacity(0.1)
+                .foregroundColor(.black)
             
             Text("Este es un texto algo largo que tiene bastante información")
                 .lineLimit(10)
+                .foregroundColor(.black)
             
             Spacer()
         }
@@ -150,6 +152,7 @@ struct CardBottomView: View {
         .background(Color.white)
         .cornerRadius(30)
         .shadow(radius: 20)
-        .offset(y: 580)
+        .offset(y: 600)
+    
     }
 }
